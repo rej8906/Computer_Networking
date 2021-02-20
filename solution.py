@@ -4,7 +4,7 @@ import sys  # In order to terminate the program
 
 
 def webServer(port=13331):
-    serverName = 'RobsServer'
+    serverName = 'helloworld.html'
 
     serverPort = 13331
 
