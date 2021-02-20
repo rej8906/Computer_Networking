@@ -40,10 +40,13 @@ def webServer(port=13331):
             for i in range(0, len(outputdata)):
                 connectionSocket.send('HTTP/1.1 200 OK\nContent-Type: text/html\n\n')
             connectionSocket.send("\r\n".encode())
-            # print('OK (200)')
+            connectionSocket.close()
 
         except IOError:
             connectionSocket.send('HTTP/1.1 404 file not found\nContent-Type: text/html\n\n')
+            connectionSocket.send("\r\n".encode())
+            connectionSocket.close()
+
             # Send response message for file not found (404)
     serverSocket.close()
     sys.exit()  # Terminate the program after sending the corresponding data
