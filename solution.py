@@ -26,7 +26,7 @@ def webServer(port=13331):
 
         # Fill in start      #Fill in end
         try:
-            message = serverSocket.recv(13331)
+            message = raw_input("what is filename?")
             filename = message.split()[1]
             f = open(filename[1:])
             outputdata = f
