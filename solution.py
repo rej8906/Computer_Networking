@@ -27,8 +27,8 @@ def webServer(port=13331):
         # Fill in start      #Fill in end
         try:
             message = 'helloworld.html'
-            filename = message.split()[1]
-            f = open(filename[1:])
+            filename = message.split()
+            f = open(filename)
             outputdata = f
 
             # Send one HTTP header line into socket
@@ -36,7 +36,7 @@ def webServer(port=13331):
 
             # Fill in end
 
-            # Send the content of the requested file to the client
+            get
             for i in range(0, len(outputdata)):
                 connectionSocket.send('HTTP/1.1 200 OK\nContent-Type: text/html\n\n')
             connectionSocket.send("\r\n".encode())
