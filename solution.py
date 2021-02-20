@@ -26,7 +26,7 @@ def webServer(port=13331):
 
         # Fill in start      #Fill in end
         try:
-            message = "hello welcome to the thunderdome"
+            message = b "test message\n"
             filename = message.split()[1]
             f = open(filename[1:])
             outputdata = f
