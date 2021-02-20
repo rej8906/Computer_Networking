@@ -28,7 +28,7 @@ def webServer(port=13331):
         try:
             message = "click here now"
             filename = message.split()[1]
-            f = open(filename[1:])
+            f = open("helloworld.html")
             outputdata = f
 
             # Send one HTTP header line into socket
