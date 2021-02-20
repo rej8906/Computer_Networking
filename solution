@@ -20,7 +20,7 @@ def webServer(port=13331):
 
    while True:
        #Establish the connection
-       print('Server socket is ready to receive:')
+       #print('Server socket is ready to receive:')
        connectionSocket, addr = serverSocket.accept()
        connectionSocket.recv(13331).decode()
 
