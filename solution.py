@@ -38,12 +38,12 @@ def webServer(port=13331):
 
             # Send the content of the requested file to the client
             for i in range(0, len(outputdata)):
-                connectionSocket.send('HTTP/1.1\n\n 200 OK Content-Type: text/html')
+                connectionSocket.send('HTTP/1.1 200 OK\nContent-Type: text/html\n\n')
             connectionSocket.send("\r\n".encode())
             connectionSocket.close()
 
         except IOError:
-                connectionSocket.send('HTTP/1.1\n\n 404 file not found Content-Type: text/html')
+            connectionSocket.send('HTTP/1.1 404 file not found\nContent-Type: text/html\n\n')
             connectionSocket.send("\r\n".encode())
             connectionSocket.close()
 
@@ -57,6 +57,7 @@ def webServer(port=13331):
     # Close client socket
     # Fill in start
 
+    # Fill in end
 
 if __name__ == "__main__":
     webServer(13331)
