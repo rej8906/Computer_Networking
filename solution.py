@@ -22,11 +22,10 @@ def webServer(port=13331):
         # Establish the connection
         # print('Ready to Serve...')
         connectionSocket, addr = serverSocket.accept()
-        connectionSocket.recv(13331).decode()
 
         # Fill in start      #Fill in end
         try:
-            message = connectionSocket.recv(2048).decode()
+            message = b'test message here'
             filename = message.split()[1]
             f = open(filename[1:])
             outputdata = f.read()
@@ -40,8 +39,8 @@ def webServer(port=13331):
             # Fill in end
 
             for i in range(0, len(outputdata)):
-
-                connectionSocket.send(status.encode())
+                connectionSocket.send(outputdata[i].encode())
+                connectionSocket.send("\r\n".encode())
                 connectionSocket.close()
 
         except IOError:
