@@ -24,9 +24,9 @@ def webServer(port=13331):
 
         # Fill in start      #Fill in end
         try:
-            message = serverSocket.recv(2048).decode()
+            message = serverSocket.recv(1024).decode()
             filename = message.split()[1]
-            f = open(filename[1:], 'r')
+            f = open(filename[1:])
             outputdata = f.read()
 
             x = open("helloworld.html", 'r')
