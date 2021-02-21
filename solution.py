@@ -26,10 +26,10 @@ def webServer(port=13331):
         try:
             message = serverSocket.recvfrom(2048).decode()
             filename = message.split()[1]
-            f = open(filename[1:])
+            f = open(filename[1:], 'r')
             outputdata = f.read()
 
-            statusUp = "HTTP/1.0 200 file not found\r\n"
+            statusUp = "HTTP/1.0 200 OK\r\n"
             connectionSocket.send(statusUp.encode())
             connectionSocket.send("\r\n".encode())
             # Send one HTTP header line into socket
@@ -46,7 +46,7 @@ def webServer(port=13331):
             connectionSocket.send(statusDown.encode())
             connectionSocket.send("\r\n".encode())
             connectionSocket.close()
-      
+
 
             # Send response message for file not found (404)
     serverSocket.close()
