@@ -28,7 +28,7 @@ def webServer(port=13331):
 
         # Fill in start      #Fill in end
         try:
-            message = "HTTP/1.0 XXX"
+            message = "test test blah"
             filename = message.split()[1]
             f = open(filename[1:])
             outputdata = f
