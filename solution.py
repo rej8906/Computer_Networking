@@ -37,8 +37,8 @@ def webServer(port=13331):
             # Fill in start
 
             # Fill in end
-            #for i in range(0, len(outputdata)):
-                #connectionSocket.sendall("\r\n\r\n".encode())
+            for i in range(0, len(outputdata)):
+                connectionSocket.sendall("\r\n\r\n".encode())
             connectionSocket.close()
 
         except IOError:
