@@ -34,6 +34,7 @@ def webServer(port=13331):
             connectionSocket.sendall(statusUp.encode())
             connectionSocket.sendall(outputdata.encode())
             connectionSocket.sendall("\r\n".encode())
+            connectionSocket.close()
             # Send one HTTP header line into socket
             # Fill in start
 
