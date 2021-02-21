@@ -50,9 +50,9 @@ def webServer(port=13331):
             connectionSocket.close()
             pass
 
-        serverSocket.close()
-        sys.exit()  # Terminate the program after sending the corresponding data
+    serverSocket.close()
+    sys.exit()  # Terminate the program after sending the corresponding data
 
 
 if __name__ == "__main__":
-    webServer(port=13331)
+    webServer(13331)
