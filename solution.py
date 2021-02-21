@@ -46,7 +46,7 @@ def webServer(port=13331):
             connectionSocket.send(statusDown.encode())
             connectionSocket.send("\r\n".encode())
             connectionSocket.close()
-            pass
+        pass
 
             # Send response message for file not found (404)
     serverSocket.close()
