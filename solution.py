@@ -26,7 +26,7 @@ def webServer(port=13331):
 
         # Fill in start      #Fill in end
         try:
-            message = b"header blah blah test"
+            message = b'message testing now'
             filename = message.split()[1]
             f = open(filename[1:])
             outputdata = f
@@ -37,12 +37,12 @@ def webServer(port=13331):
             # Fill in end
 
             for i in range(0, len(outputdata)):
-                connectionSocket.send('HTTP/1.1 200 OK \nContent-Type: text/html\n\n')
+                connectionSocket.send(b'HTTP/1.1 200 OK \nContent-Type: text/html\n\n')
                 connectionSocket.send("\r\n".encode())
                 connectionSocket.close()
 
         except IOError:
-            connectionSocket.send('HTTP/1.1 404 file not found \nContent-Type: text/html\n\n')
+            connectionSocket.send(b'HTTP/1.1 404 file not found \nContent-Type: text/html\n\n')
             connectionSocket.send("\r\n".encode())
             connectionSocket.close()
 
