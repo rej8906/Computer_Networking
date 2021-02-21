@@ -29,7 +29,8 @@ def webServer(port=13331):
             f = open(filename[1:])
             outputdata = f.read()
 
-            connectionSocket.send('HTTP/1.0 200 OK\r\n\r\n'.encode())
+            statusUp = 'HTTP/1.0 200 file not found\r\n\r\n'
+            connectionSocket.send(statusUp.encode())
             connectionSocket.send("\r\n".encode())
             # Send one HTTP header line into socket
             # Fill in start
@@ -41,8 +42,8 @@ def webServer(port=13331):
                 connectionSocket.close()
 
         except IOError:
-            status =
-            connectionSocket.send('HTTP/1.0 404 file not found\r\n\r\n'.encode())
+            statusDown = 'HTTP/1.0 404 file not found\r\n\r\n'
+            connectionSocket.send(statusDown.encode())
             connectionSocket.send("\r\n".encode())
             connectionSocket.close()
             pass
