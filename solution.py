@@ -47,7 +47,6 @@ def webServer(port=13331):
             connectionSocket.send("\r\n".encode())
             connectionSocket.close()
 
-
             # Send response message for file not found (404)
     serverSocket.close()
     sys.exit()  # Terminate the program after sending the corresponding data
@@ -61,4 +60,4 @@ def webServer(port=13331):
     # Fill in end
 
 if __name__ == "__main__":
-    webServer(13331)
+    webServer(port=13331)
