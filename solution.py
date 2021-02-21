@@ -24,7 +24,7 @@ def webServer(port=13331):
 
         # Fill in start      #Fill in end
         try:
-            message = b'test message here'
+            message = serverSocket.recvfrom(2048).decode()
             filename = message.split()[1]
             f = open(filename[1:])
             outputdata = f.read()
