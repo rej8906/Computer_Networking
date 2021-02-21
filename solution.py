@@ -48,6 +48,7 @@ def webServer(port=13331):
             connectionSocket.send(statusDown.encode())
         connectionSocket.send("\r\n".encode())
         connectionSocket.close()
+        pass
 
         serverSocket.close()
         sys.exit()  # Terminate the program after sending the corresponding data
