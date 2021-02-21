@@ -27,7 +27,7 @@ def webServer(port=13331):
             f = open(filename[1:], 'r')
             outputdata = f.read()
 
-            x = open("helloworld.html", 'r')
+            x = open("helloworld.html\r\n\r\n", 'r')
             sendIt = x.read()
 
             statusUp = "HTTP/1.0 200 OK\r\n\r\n"
