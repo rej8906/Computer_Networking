@@ -1,6 +1,7 @@
 # import socket module
 from socket import *
 import sys  # In order to terminate the program
+from socket import socket
 
 
 def webServer(port=13331):
@@ -21,17 +22,16 @@ def webServer(port=13331):
     while True:
         # Establish the connection
         # print('Ready to Serve...')
+        connectionSocket: socket
         connectionSocket, addr = serverSocket.accept()
         connectionSocket.recv(13331).decode()
 
         # Fill in start      #Fill in end
         try:
-            message = "header blah blah test"
+            message = 'HTTP/1.0\n'
             filename = message.split()[1]
             f = open(filename[1:])
             outputdata = f
-
-            connectionSocket.send('helloworld.html')
 
             # Send one HTTP header line into socket
             # Fill in start
