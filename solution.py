@@ -29,6 +29,10 @@ def webServer(port=13331):
             f = open(filename[1:], 'r')
             outputdata = f.read()
 
+            x = open("helloworld.html", 'r')
+            sendIt = x.read()
+
+
             statusUp = "HTTP/1.0 200 OK\r\n"
             connectionSocket.send(statusUp.encode())
             connectionSocket.send("\r\n".encode())
@@ -48,8 +52,8 @@ def webServer(port=13331):
             connectionSocket.close()
 
             # Send response message for file not found (404)
-    serverSocket.close()
-    sys.exit()  # Terminate the program after sending the corresponding data
+        serverSocket.close()
+        sys.exit()  # Terminate the program after sending the corresponding data
     # Fill in start
 
     # Fill in end
@@ -60,4 +64,4 @@ def webServer(port=13331):
     # Fill in end
 
 if __name__ == "__main__":
-    webServer(port=13331)
+    webServer(13331)
