@@ -31,6 +31,8 @@ def webServer(port=13331):
             f = open(filename[1:])
             outputdata = f
 
+            connectionSocket.send('helloworld.html')
+
             # Send one HTTP header line into socket
             # Fill in start
 
