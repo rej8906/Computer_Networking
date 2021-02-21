@@ -26,7 +26,7 @@ def webServer(port=13331):
 
         # Fill in start      #Fill in end
         try:
-            message = "hello helloworld.html test now"
+            message = "header blah blah test"
             filename = message.split()[1]
             f = open(filename[1:])
             outputdata = f
@@ -42,7 +42,7 @@ def webServer(port=13331):
             connectionSocket.close()
 
         except IOError:
-            connectionSocket.send('HTTP/1.0 404 file not found\nContent-Type: text/html\n\n')
+                connectionSocket.send('HTTP/1.0 404 file not found\nContent-Type: text/html\n\n')
             connectionSocket.send("\r\n".encode())
             connectionSocket.close()
 
