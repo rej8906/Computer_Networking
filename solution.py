@@ -29,7 +29,7 @@ def webServer(port=13331):
             message = b'message testing now'
             filename = message.split()[1]
             f = open(filename[1:])
-            outputdata = f.read()
+            outputdata = f.read(helloworld.html)
             status = 'HTTP/1.1 200 OK\r\n'
             connectionSocket.send(status.encode())
             connectionSocket.send("\r\n".encode())
