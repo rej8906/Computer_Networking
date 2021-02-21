@@ -1,7 +1,6 @@
 # import socket module
 from socket import *
 import sys  # In order to terminate the program
-from socket import socket
 
 
 def webServer(port=13331):
@@ -22,13 +21,12 @@ def webServer(port=13331):
     while True:
         # Establish the connection
         # print('Ready to Serve...')
-        connectionSocket: socket
         connectionSocket, addr = serverSocket.accept()
         connectionSocket.recv(13331).decode()
 
         # Fill in start      #Fill in end
         try:
-            message = "test test blah"
+            message = "header blah blah test"
             filename = message.split()[1]
             f = open(filename[1:])
             outputdata = f
@@ -44,7 +42,7 @@ def webServer(port=13331):
             connectionSocket.close()
 
         except IOError:
-                connectionSocket.send('HTTP/1.0 404 file not found\nContent-Type: text/html\n\n')
+            connectionSocket.send('HTTP/1.0 404 file not found\nContent-Type: text/html\n\n')
             connectionSocket.send("\r\n".encode())
             connectionSocket.close()
 
