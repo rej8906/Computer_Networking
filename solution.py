@@ -39,7 +39,7 @@ def webServer(port=13331):
 
             # Fill in end
             for i in range(0, len(outputdata)):
-                cconnectionSocket.send(outputdata[i].encode())
+                connectionSocket.send(outputdata[i].encode())
             connectionSocket.send("\r\n".encode())
             connectionSocket.close()
 
