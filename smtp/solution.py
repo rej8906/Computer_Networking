@@ -4,7 +4,7 @@ def smtp_client(port=25, mailserver='127.0.0.1'):
    msg = "\r\n My message"
    endmsg = "\r\n.\r\n"
 
-   mailserver = ('127.0.0.1', 25)            # Choose a mail server (e.g. Google mail server) if you want to verify the script beyond GradeScope
+   mailserver = ('127.0.0.1', 25) # Choose a mail server (e.g. Google mail server) if you want to verify the script beyond GradeScope
 
    clientSocket = socket(AF_INET, SOCK_STREAM)
    clientSocket.connect((mailserver)) # Create socket called clientSocket and establish a TCP connection with mailserver and port
@@ -17,9 +17,9 @@ def smtp_client(port=25, mailserver='127.0.0.1'):
    # Send HELO command and print server response.
    heloCommand = 'HELO Alice\r\n'
    clientSocket.send(heloCommand.encode())
-   recv1 = clientSocket.recv(1024).decode()
+   #recv1 = clientSocket.recv(1024).decode()
    #print(recv1)
-   if recv1[:3] != '250':
+   #if recv1[:3] != '250':
        #print('250 reply not received from server.')
 
    # Send MAIL FROM command and print server response.
@@ -40,7 +40,7 @@ def smtp_client(port=25, mailserver='127.0.0.1'):
    data = 'data\r\n'
    clientSocket.send(data.encode())
    recv4 = clientSocket.recv(1024)
-   recv4 = recv3.decode()
+   recv4 = recv4.decode()
    #print("Data:" + recv4)
 
    # Send message data.
