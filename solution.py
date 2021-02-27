@@ -3,9 +3,7 @@ from socket import *
 def smtp_client(port=1025, mailserver='127.0.0.1'):
     msg = "\r\n My message"
     endmsg = "\r\n.\r\n"
-
-
-    #mailserver = ('127.0.0.1', 1025) # Choose a mail server (e.g. Google mail server)
+    quit = "\r\n QUIT"
 
     clientSocket = socket(AF_INET, SOCK_STREAM)
     clientSocket.connect(('127.0.0.1', 1025)) # Create socket called clientSocket and establish a TCP connection with mailserver and port
@@ -45,20 +43,9 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     recv4 = recv4.decode()
     #print("Data:" + recv4)
 
-    # Send message data.
-    clientSocket.send(msg.encode())
-    #recv5 = clientSocket.recv(1024)
-    #recv5 = recv5.decode()
-    #print("Msg:" + recv5)
-
-    # Message ends with a single period.
-    clientSocket.send(endmsg.encode())
-    #recv6 = clientSocket.recv(1024).decode()
-    #print("End:" + recv6)
-
-    # Send QUIT command and get server response.
-    quit = 'QUIT\r\n'
-    clientSocket.send(quit.encode())
+    clientSocket.send(msg.encode()) # Send message data.
+    clientSocket.send(endmsg.encode())# Message ends with a single period.
+    clientSocket.send(quit.encode())# Send QUIT command and get server response.
     recv7 = clientSocket.recv(1024).decode()
     #print("End:" + recv7)
     clientSocket.close()
