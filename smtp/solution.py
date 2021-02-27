@@ -1,8 +1,9 @@
 from socket import *
 
 def smtp_client(port=1025, mailserver='127.0.0.1'):
-    msg = '\r\n My message'
-    endmsg = '\r\n.\r\n'
+    msg = "\r\n My message"
+    endmsg = "\r\n.\r\n"
+
 
     mailserver = ('127.0.0.1', 1025) # Choose a mail server (e.g. Google mail server)
 
