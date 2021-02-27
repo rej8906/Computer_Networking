@@ -9,9 +9,9 @@ def smtp_client(port=25, mailserver='127.0.0.1'):
    clientSocket = socket(AF_INET, SOCK_STREAM)
    clientSocket.connect((mailserver)) # Create socket called clientSocket and establish a TCP connection with mailserver and port
 
-   recv = clientSocket.recv(1024).decode()
+   #recv = clientSocket.recv(1024).decode()
    #print(recv)
-   if recv[:3] != '220':
+   #if recv[:3] != '220':
        #print('220 reply not received from server.')
 
    # Send HELO command and print server response.
