@@ -5,10 +5,10 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     endmsg = "\r\n.\r\n"
 
 
-    mailserver = ('127.0.0.1', 1025) # Choose a mail server (e.g. Google mail server)
+    #mailserver = ('127.0.0.1', 1025) # Choose a mail server (e.g. Google mail server)
 
     clientSocket = socket(AF_INET, SOCK_STREAM)
-    clientSocket.connect(mailserver) # Create socket called clientSocket and establish a TCP connection with mailserver and port
+    clientSocket.connect(('127.0.0.1', 1025)) # Create socket called clientSocket and establish a TCP connection with mailserver and port
 
     recv = clientSocket.recv(1024).decode()
     #print(recv)
@@ -39,7 +39,7 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
     #print("RCPT TO: " + recv3)
 
     # Send DATA command and print server response.
-    data = 'data\r\n'
+    data = 'DATA\r\n'
     clientSocket.send(data.encode())
     recv4 = clientSocket.recv(1024)
     recv4 = recv4.decode()
