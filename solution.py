@@ -5,10 +5,13 @@ import struct
 import time
 import select
 import binascii
-# Should use stdev
+from statistics import stdev
 
 ICMP_ECHO_REQUEST = 8
-
+packet_min = 0
+packet_avg = 0
+packet_max = 0
+stdev_var = 0
 
 def checksum(string):
     csum = 0
@@ -86,7 +89,6 @@ def sendOnePing(mySocket, destAddr, ID):
 def doOnePing(destAddr, timeout):
     icmp = getprotobyname("icmp")
 
-
     # SOCK_RAW is a powerful socket type. For more details: http://sockraw.org/papers/sock_raw
 
     mySocket = socket(AF_INET, SOCK_RAW, icmp)
@@ -103,12 +105,13 @@ def ping(host, timeout=1):
    #print("Pinging " + dest + " using Python:")
    #print("")
    # Calculate vars values and return them
-   # vars = [str(round(packet_min, 2)), str(round(packet_avg, 2)), str(round(packet_max, 2)),str(round(stdev(stdev_var), 2))]
+   vars = [str(round(packet_min, 2)), str(round(packet_avg, 2)), str(round(packet_max, 2)), str(round(stdev_var, 2))]
    # Send ping requests to a server separated by approximately one second
    for i in range(0,4):
        delay = doOnePing(dest, timeout)
        #print(delay)
        time.sleep(1)
+
    return vars
 
 if __name__ == '__main__':
