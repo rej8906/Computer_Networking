@@ -16,13 +16,13 @@ def checksum(string):
     count = 0
 
     while count < countTo:
-        thisVal = (string[count + 1]) * 256 + (string[count])
+        thisVal = ord(string[count + 1]) * 256 + ord(string[count])
         csum += thisVal
         csum &= 0xffffffff
         count += 2
 
     if countTo < len(string):
-        csum += (string[len(string) - 1])
+        csum += ord(string[len(string) - 1])
         csum &= 0xffffffff
 
     csum = (csum >> 16) + (csum & 0xffff)
@@ -39,25 +39,24 @@ def receiveOnePing(mySocket, ID, timeout, destAddr):
         startedSelect = time.time()
         whatReady = select.select([mySocket], [], [], timeLeft)
         howLongInSelect = (time.time() - startedSelect)
-    if whatReady[0] == []:  # Timeout
-        return "Request timed out."
-    timeReceived = time.time()
-    recPacket, addr = mySocket.recvfrom(1024)
-    # Fill in start
-    # Fetch the ICMP header from the IP packet
-    icmpMessage = recPacket[20:28]
-    type, code, checksum, identifier, sequence = struct.unpack('bbHHh', icmpMessage)
-    if ID == identifier:
-        # originate timestamp is located 28-36 bytes of echo reply message.
-        timeSent = struct.unpack('d', recPacket[28:36])[0]
-        delay = timeReceived - timeSent
-        return delay
-    else:
-        print ("Expected Packet not arrived")
-    # Fill in end
-    timeLeft = timeLeft - howLongInSelect
-    if timeLeft <= 0:
-        return "Request timed out."
+        if whatReady[0] == []:  # Timeout
+            return "Request timed out."
+        timeReceived = time.time()
+        recPacket, addr = mySocket.recvfrom(1024)
+        # Fill in start
+        # Fetch the ICMP header from the IP packet
+        icmpMessage = recPacket[20:28]
+        type, code, checksum, identifier, sequence = struct.unpack('bbHHh', icmpMessage)
+        if ID == identifier:
+            timeSent = struct.unpack('d', recPacket[28:36])[0]
+            delay = timeReceived - timeSent
+            return delay
+        #else:
+            #print ("Expected Packet not arrived")
+            # Fill in end
+        timeLeft = timeLeft - howLongInSelect
+        if timeLeft <= 0:
+            return "Request timed out."
 
 
 def sendOnePing(mySocket, destAddr, ID):
@@ -101,14 +100,14 @@ def doOnePing(destAddr, timeout):
 def ping(host, timeout=1):
    # timeout=1 means: If one second goes by without a reply from the server, # the client assumes that either the client's ping or the server's pong is lost
    dest = gethostbyname(host)
-   print("Pinging " + dest + " using Python:")
-   print("")
+   #print("Pinging " + dest + " using Python:")
+   #print("")
    # Calculate vars values and return them
    # vars = [str(round(packet_min, 2)), str(round(packet_avg, 2)), str(round(packet_max, 2)),str(round(stdev(stdev_var), 2))]
    # Send ping requests to a server separated by approximately one second
    for i in range(0,4):
        delay = doOnePing(dest, timeout)
-       print(delay)
+       #print(delay)
        time.sleep(1)
    return vars
 
