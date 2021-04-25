@@ -62,9 +62,10 @@ def receiveOnePing(mySocket, ID, timeout, destAddr):
         bytesInDouble = struct.calcsize('d')
         timeData = struct.unpack('d', recPacket[28:28 + bytesInDouble])[0]
         delay = (timeReceived - timeData)
-        packet_min = max(packet_min, delay)
-        packet_min = max(packet_max, delay)
+        packet_min = min(packet_min, delay)
+        packet_max = max(packet_max, delay)
         packet_sum += (packet_min + packet_max) / packet_sum
+        stdev_var = delay
         packet_cnt += 1
 
         ip_header = struct.unpack('!BBHHHBBH4s4s', recPacket[:20])
@@ -127,7 +128,7 @@ def ping(host, timeout=1):
     #print("Pinging " + dest + " using Python:")
     #print("")
     # Calculate vars values and return them
-    #vars = [str(round(packet_min, 2)), str(round(packet_avg, 2)), str(round(packet_max, 2)), str(round(stdev_var, 2))]
+    vars = [str(round(packet_min, 3)), str(round(packet_avg, 2)), str(round(packet_max, 2)), str(round(stdev_var, 2))]
     # Send ping requests to a server separated by approximately one second
     for i in range(0,4):
         packet_cnt +=1
