@@ -58,7 +58,7 @@ def receiveOnePing(mySocket, ID, timeout, destAddr):
         type, code, checksum, id, seq = struct.unpack('bbHHh', recPacket[20:28])
         bytesInDouble = struct.calcsize('d')
         timeData = struct.unpack('d', recPacket[28:28 + bytesInDouble])[0]
-        delay = (timeReceived - timeData) * 1000
+        delay = (timeReceived - timeData)
         packet_min = min(packet_min, delay)
         packet_max = max(packet_max, delay)
         stdev_var[packet_cnt] = delay;
@@ -117,8 +117,8 @@ def ping(host, timeout=1):
     global delay, packet_max, packet_min, packet_avg, stdev_var
     #timeout=1 means: If one second goes by without a reply from the server, # the client assumes that either the client's ping or the server's pong is lost
     dest = gethostbyname(host)
-    print("Pinging " + dest + " using Python:")
-    print("")
+    #print("Pinging " + dest + " using Python:")
+    #print("")
     # Calculate vars values and return them
     # Send ping requests to a server separated by approximately one second
     for i in range(0,4):
@@ -126,8 +126,8 @@ def ping(host, timeout=1):
         #print(delay)
         time.sleep(1) #change me to 1
 
-    vars = [str(round(packet_min, 2)), str(round(packet_avg, 2)), str(round(packet_max, 2)), str(round(stdev(stdev_var), 2))] # change me to 2
+    vars = [str(round(packet_min*1000, 2)), str(round(packet_avg*1000, 2)), str(round(packet_max*1000, 2)), str(round((stdev(stdev_var))*1000, 2))] # change me to 2
     return vars
 
 if __name__ == '__main__':
-    ping("google.co.il")
+    print(ping("google.co.il"))
