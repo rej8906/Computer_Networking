@@ -128,10 +128,10 @@ def ping(host, timeout=1):
         time.sleep(1) #change me to 1
 
     #vars = [float(round(packet_min , 5)), float(round(packet_avg , 5)), float(round(packet_max , 5)), float(round((stdev(stdev_var)), 5))] # change me to 2
-    vars.append(float(round(packet_min * 1000, 2)))
-    vars.append(float(round(packet_avg * 1000, 2)))
-    vars.append(float(round(packet_max * 1000, 2)))
-    vars.append(float(round((stdev(stdev_var)) * 1000 ,2)))
+    vars.append(float(round(packet_min , 2)))
+    vars.append(float(round(packet_avg , 2)))
+    vars.append(float(round(packet_max , 2)))
+    vars.append(float(round((stdev(stdev_var)),2)))
     return vars
 
 if __name__ == '__main__':
