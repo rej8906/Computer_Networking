@@ -59,7 +59,6 @@ def receiveOnePing(mySocket, ID, timeout, destAddr):
         bytesInDouble = struct.calcsize('d')
         timeData = struct.unpack('d', recPacket[28:28 + bytesInDouble])[0]
         delay = (timeReceived - timeData)
-        delay = delay * 1000
         packet_min = min(packet_min, delay)
         packet_max = max(packet_max, delay)
         stdev_var[packet_cnt] = delay ;
