@@ -59,9 +59,10 @@ def receiveOnePing(mySocket, ID, timeout, destAddr):
         bytesInDouble = struct.calcsize('d')
         timeData = struct.unpack('d', recPacket[28:28 + bytesInDouble])[0]
         delay = (timeReceived - timeData)
+        delay = delay * 1000
         packet_min = min(packet_min, delay)
         packet_max = max(packet_max, delay)
-        stdev_var[packet_cnt] = delay;
+        stdev_var[packet_cnt] = delay ;
         packet_cnt += 1
         packet_avg = (packet_min + packet_max) / 2
 
@@ -124,10 +125,10 @@ def ping(host, timeout=1):
     for i in range(0,4):
         delay = doOnePing(dest, timeout)
         #print(delay)
-        time.sleep(1) #change me to 1
+        time.sleep(.1) #change me to 1
 
-    vars = [str(round(packet_min*1000, 2)), str(round(packet_avg*1000, 2)), str(round(packet_max*1000, 2)), str(round((stdev(stdev_var))*1000, 2))] # change me to 2
+    vars = [str(round(packet_min, 2)), str(round(packet_avg, 2)), str(round(packet_max, 2)), str(round((stdev(stdev_var)), 2))] # change me to 2
     return vars
 
 if __name__ == '__main__':
-    print(ping("google.co.il"))
+    ping("google.co.il")
