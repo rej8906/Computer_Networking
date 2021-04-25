@@ -120,17 +120,17 @@ def ping(host, timeout=1):
     packet_min = 0
     packet_avg = 0
     stdev_var = 0
-    # timeout=1 means: If one second goes by without a reply from the server, # the client assumes that either the client's ping or the server's pong is lost
+   # timeout=1 means: If one second goes by without a reply from the server, # the client assumes that either the client's ping or the server's pong is lost
     dest = gethostbyname(host)
-    #print("Pinging " + dest + " using Python:")
-    #print("")
+    print("Pinging " + dest + " using Python:")
+    print("")
     # Calculate vars values and return them
     vars = [str(round(packet_min, 3)), str(round(packet_avg, 2)), str(round(packet_max, 2)), str(round(stdev_var, 2))]
     # Send ping requests to a server separated by approximately one second
     for i in range(0,4):
         packet_cnt +=1
         delay = doOnePing(dest, timeout)
-        #print(delay)
+        print(delay)
         time.sleep(1)
 
 if __name__ == '__main__':
