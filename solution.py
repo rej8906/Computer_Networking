@@ -117,7 +117,7 @@ def ping(host, timeout=1):
     global delay, packet_max, packet_min, packet_avg, stdev_var
     #timeout=1 means: If one second goes by without a reply from the server, # the client assumes that either the client's ping or the server's pong is lost
     dest = gethostbyname(host)
-    vars = []
+    vars = [] * 4
     #print("Pinging " + dest + " using Python:")
     #print("")
     # Calculate vars values and return them
@@ -127,11 +127,11 @@ def ping(host, timeout=1):
         #print(delay)
         time.sleep(.1) #change me to 1
 
-    #vars = [float(round(packet_min , 2)), float(round(packet_avg , 2)), float(round(packet_max , 2)), float(round((stdev(stdev_var)), 2))] # change me to 2
-    vars.append(float(round(packet_min , 2)) * 1000)
-    vars.append(float(round(packet_avg , 2)) * 1000)
-    vars.append(float(round(packet_max , 2)) * 1000)
-    vars.append(float(round((stdev(stdev_var)),2)) * 1000)
+    #vars = [float(round(packet_min , 5)), float(round(packet_avg , 5)), float(round(packet_max , 5)), float(round((stdev(stdev_var)), 5))] # change me to 2
+    vars.append(float(round(packet_min , 4)) * 1000)
+    vars.append(float(round(packet_avg , 4)) * 1000)
+    vars.append(float(round(packet_max , 4)) * 1000)
+    vars.append(float(round((stdev(stdev_var)),4)) * 1000)
     return vars
 
 if __name__ == '__main__':
