@@ -10,9 +10,6 @@ from statistics import stdev
 
 ICMP_ECHO_REQUEST = 8
 
-delay = []
-
-
 def checksum(string):
     csum = 0
     countTo = (len(string) // 2) * 2
