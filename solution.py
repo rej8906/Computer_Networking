@@ -10,6 +10,12 @@ from statistics import stdev
 
 ICMP_ECHO_REQUEST = 8
 
+packet_max = float('-inf')
+packet_min = float('+inf')
+packet_avg = 0
+stdev_var = [0,0,0,0]
+packet_cnt = 0
+
 def checksum(string):
     csum = 0
     countTo = (len(string) // 2) * 2
@@ -36,11 +42,6 @@ def checksum(string):
 
 def receiveOnePing(mySocket, ID, timeout, destAddr):
     global delay, packet_cnt, packet_max, packet_min, packet_avg, stdev_var
-    packet_cnt = 1
-    packet_max = 0
-    packet_min = 0
-    packet_avg = 0
-    stdev_var = 0
     timeLeft = timeout
     while 1:
         startedSelect = time.time()
@@ -60,13 +61,13 @@ def receiveOnePing(mySocket, ID, timeout, destAddr):
         delay = (timeReceived - timeData)
         packet_min = min(packet_min, delay)
         packet_max = max(packet_max, delay)
-        packet_avg += (packet_min + packet_max) / packet_cnt
-        stdev_var = 0
+        stdev_var[packet_cnt] = delay;
         packet_cnt += 1
+        packet_avg = (packet_min + packet_max) / 2
 
         ip_header = struct.unpack('!BBHHHBBH4s4s', recPacket[:20])
 
-        return [str(round(packet_min, 2)), str(round(packet_avg, 2)), str(round(packet_max, 2)), str(round(stdev_var, 2))]
+        return delay
 
         #return timeReceived - timeData
 
@@ -114,21 +115,19 @@ def doOnePing(destAddr, timeout):
 
 def ping(host, timeout=1):
     global delay, packet_max, packet_min, packet_avg, stdev_var
-    packet_max = 0
-    packet_min = 0
-    packet_avg = 0
-    stdev_var = 0
     #timeout=1 means: If one second goes by without a reply from the server, # the client assumes that either the client's ping or the server's pong is lost
     dest = gethostbyname(host)
-    print("Pinging " + dest + " using Python:")
-    print("")
+    #print("Pinging " + dest + " using Python:")
+    #print("")
     # Calculate vars values and return them
-    # vars = [str(round(packet_min, 3)), str(round(packet_avg, 2)), str(round(packet_max, 2)), str(round(stdev_var, 2))]
     # Send ping requests to a server separated by approximately one second
     for i in range(0,4):
         delay = doOnePing(dest, timeout)
-        print(delay)
-        time.sleep(1)
+        #print(delay)
+        time.sleep(1) #change me to 1
+
+    vars = [str(round(packet_min, 2)), str(round(packet_avg, 2)), str(round(packet_max, 2)), str(round(stdev(stdev_var), 2))] # change me to 2
+    return vars
 
 if __name__ == '__main__':
     ping("google.co.il")
