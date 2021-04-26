@@ -128,6 +128,7 @@ def ping(host, timeout=1):
         time.sleep(1) #change me to 1
 
     vars = [str(round(packet_min , 2)), str(round(packet_avg , 2)), str(round(packet_max , 2)), str(round((stdev(stdev_var)), 2))] # change me to 2
+    print("testme")
     #vars.append(str(round(packet_min , 2)))
     #vars.append(str(round(packet_avg , 2)))
     #vars.append(str(round(packet_max , 2)))
