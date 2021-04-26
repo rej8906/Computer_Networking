@@ -128,7 +128,7 @@ def ping(host, timeout=1):
         time.sleep(1) #change me to 1
 
     vars = [str((round(packet_min * 1000 , 2))), str(round((packet_avg*1000) , 2)), str(round((packet_max* 1000) , 2)), str(round(((stdev(stdev_var)) * 1000), 2))] # change me to 2
-    sys.exit()
+
     print("testvals:")
     print("min", packet_min)
     print("avg" , packet_avg)
@@ -141,7 +141,9 @@ def ping(host, timeout=1):
     #vars.append(str(round(((stdev(stdev_var))* 1000) ,2)))
     print (vars)
     return vars
+    sys.exit()
 
 if __name__ == '__main__':
     ping("google.co.il")
+    sys.exit()
 
