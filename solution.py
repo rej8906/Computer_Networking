@@ -140,6 +140,7 @@ def ping(host, timeout=1):
     vars.append(str(round(((stdev(stdev_var))* 1000) ,2)))
     print (vars)
     return vars
+    sys.exit()
 
 if __name__ == '__main__':
     ping("google.co.il")
