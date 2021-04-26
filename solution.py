@@ -141,6 +141,3 @@ def ping(host, timeout=1):
     print (vars)
     return vars
     sys.exit()
-
-if __name__ == '__main__':
-    ping("google.co.il")
