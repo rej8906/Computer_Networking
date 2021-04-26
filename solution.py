@@ -132,10 +132,11 @@ def ping(host, timeout=1):
     print("min", packet_min)
     print("avg" , packet_avg)
     print("max" , packet_max)
-    #print("stdev" , ((stdev(stdev_var))))
+    print("stdev" , ((stdev(stdev_var))))
 
-    vars.append(str(round(packet_min , 2)))
-    vars.append(str(round(packet_avg , 2)))
-    vars.append(str(round(packet_max , 2)))
-    vars.append(str(round((stdev(stdev_var)) ,2)))
+    vars.append(str(round(packet_min *1000 , 2)))
+    vars.append(str(round(packet_avg *1000 , 2)))
+    vars.append(str(round(packet_max *1000, 2)))
+    vars.append(str(round(((stdev(stdev_var))* 1000) ,2)))
+    print (vars)
     return vars
