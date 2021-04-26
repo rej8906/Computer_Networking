@@ -127,7 +127,7 @@ def ping(host, timeout=1):
         print(delay)
         time.sleep(1) #change me to 1
 
-    vars = [str(round(packet_min , 2)), str(round(packet_avg , 2)), str(round(packet_max , 2)), str(round(((stdev(stdev_var)) * 1000), 2))] # change me to 2
+    vars = [str((round(packet_min * 1000 , 2))), str(round((packet_avg*1000) , 2)), str(round((packet_max* 1000) , 2)), str(round(((stdev(stdev_var)) * 1000), 2))] # change me to 2
     print("testvals:")
     print("min", packet_min)
     print("avg" , packet_avg)
