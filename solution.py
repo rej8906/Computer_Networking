@@ -49,7 +49,7 @@ def receiveOnePing(mySocket, ID, timeout, destAddr):
         howLongInSelect = (time.time() - startedSelect)
         if whatReady[0] == []:  # Timeout
             return "Request timed out."
-        timeReceived = (time.time()) * 10
+        timeReceived = time.time()
         recPacket, addr = mySocket.recvfrom(1024)
         # Fill in start
         # Fetch the ICMP header from the IP packet
@@ -57,8 +57,8 @@ def receiveOnePing(mySocket, ID, timeout, destAddr):
         icmpHeader = recPacket[20:28]
         type, code, checksum, id, seq = struct.unpack('bbHHh', recPacket[20:28])
         bytesInDouble = struct.calcsize('d')
-        timeData = (struct.unpack('d', recPacket[28:28 + bytesInDouble])[0]) * 10
-        delay = (timeReceived - timeData) * 100
+        timeData = (struct.unpack('d', recPacket[28:28 + bytesInDouble])[0])
+        delay = round(((timeReceived - timeData) * 1000), 2 )
         packet_min = min(packet_min, delay)
         packet_max = max(packet_max, delay)
         stdev_var[packet_cnt] = delay ;
