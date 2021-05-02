@@ -132,7 +132,8 @@ def ping(host, timeout=1):
     vars.append(str(round(packet_avg , 2)))
     vars.append(str(round(packet_max)))
     vars.append(str(round((stdev(stdev_var)) ,2)))
+    print(vars)
     return vars
 
 if __name__ == '__main__':
-    print(ping("google.co.il"))
+    ping("google.co.il")
