@@ -45,11 +45,12 @@ def build_packet():
     # Fill in start
     #Header is type(8), code(8), checksum(16), id(16), sequence(16)
     myChecksum = 0
+    myID = os.getpid() & 0xFFFF
     # Make a dummy header with a 0 checksum
     # struct -- Interpret strings as packed binary data
     # In the sendOnePing() method of the ICMP Ping exercise ,firstly the header of our
     # packet to be sent was made,
-    header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, ID, 1)
+    header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, myID, 1)
     data = struct.pack("d", time.time())
     # Calculate the checksum on the data and the dummy header.
     myChecksum = checksum(header + data)
@@ -59,7 +60,7 @@ def build_packet():
         myChecksum = htons(myChecksum) & 0xffff
     else:
         myChecksum = htons(myChecksum)
-    header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, ID, 1)
+    header = struct.pack("bbHHh", ICMP_ECHO_REQUEST, 0, myChecksum, myID, 1)
     #secondly the checksum was appended to the header and
     packet = header + data
     # then finally the complete packet was sent to the destination.
@@ -77,6 +78,7 @@ def get_route(hostname):
     tracelist2 = []  # This is your list to contain all traces
 
 
+
     for ttl in range(1, MAX_HOPS):
         for tries in range(TRIES):
             destAddr = gethostbyname(hostname)
@@ -84,7 +86,7 @@ def get_route(hostname):
             icmp = getprotobyname("icmp")
             # Make a raw socket named mySocket
             mySocket = socket(AF_INET, SOCK_RAW, icmp) # Make a raw socket named mySocket
-            # myID = os.getpid() & 0xFFFF
+            #ID = os.getpid() & 0xFFFF
             # Fill in end
             mySocket.setsockopt(IPPROTO_IP, IP_TTL, struct.pack('I', ttl))
             mySocket.settimeout(TIMEOUT)
