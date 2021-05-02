@@ -59,18 +59,19 @@ def receiveOnePing(mySocket, ID, timeout, destAddr):
 
         icmpHeader = recPacket[20:28]
         type, code, checksum, id, seq = struct.unpack('bbHHh', recPacket[20:28])
-        bytesInDouble = struct.calcsize('d')
-        timeData = struct.unpack('d', recPacket[28:28 + bytesInDouble])[0]
-        delay = (timeReceived - timeData) * 1000
-        packet_min = min(packet_min, delay)
-        packet_max = max(packet_max, delay)
-        stdev_var[packet_cnt] = delay ;
-        packet_cnt += 1
-        packet_avg = (packet_min + packet_max) / 2
-
         ip_header = struct.unpack('!BBHHHBBH4s4s', recPacket[:20])
-
-        return delay
+        if ID == id:
+            bytesInDouble = struct.calcsize('d')
+            timeData = struct.unpack('d', recPacket[28:28 + bytesInDouble])[0]
+            delay = (timeReceived - timeData) * 1000
+            packet_min = min(packet_min, delay)
+            packet_max = max(packet_max, delay)
+            stdev_var[packet_cnt] = delay ;
+            packet_cnt += 1
+            packet_avg = (packet_min + packet_max) / 2
+            return delay
+        else:
+            return 0
 
         #return timeReceived - timeData
 
@@ -141,6 +142,3 @@ def ping(host, timeout=1):
     print(pstdev(stdev_var))
     print(vars)
     return vars
-
-if __name__ == '__main__':
-    ping("google.co.il")
