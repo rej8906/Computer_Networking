@@ -59,7 +59,7 @@ def receiveOnePing(mySocket, ID, timeout, destAddr):
         type, code, checksum, id, seq = struct.unpack('bbHHh', recPacket[20:28])
         bytesInDouble = struct.calcsize('d')
         timeData = struct.unpack('d', recPacket[28:28 + bytesInDouble])[0]
-        delay = round((timeReceived - timeData) * 1000)
+        delay = round((timeReceived - timeData) * 1000 , 2 )
         packet_min = min(packet_min, delay)
         packet_max = max(packet_max, delay)
         stdev_var[packet_cnt] = delay ;
@@ -129,9 +129,9 @@ def ping(host, timeout=1):
         time.sleep(1) #change me to 1
 
     #vars = [float(round(packet_min , 2)), float(round(packet_avg , 2)), float(round(packet_max , 2)), float(round((stdev(stdev_var)), 2))] # change me to 2
-    vars.append(str(round(packet_min , 2)))
+    vars.append(str(round(packet_min )))
     vars.append(str(round(packet_avg , 2)))
-    vars.append(str(round(packet_max , 2)))
+    vars.append(str(round(packet_max )))
     vars.append(str(round((pstdev(stdev_var)) ,2 )))
     print(vars)
     return vars
