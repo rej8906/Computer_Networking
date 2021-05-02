@@ -168,5 +168,3 @@ def get_route(hostname):
                 break
             finally:
                 mySocket.close()
-
-get_route("google.com")
