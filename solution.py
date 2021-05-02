@@ -81,7 +81,7 @@ def get_route(hostname):
         for tries in range(TRIES):
             destAddr = gethostbyname(hostname)
             # Fill in start
-            icmp = socket.getprotobyname("icmp")
+            icmp = getprotobyname("icmp")
             # Make a raw socket named mySocket
             mySocket = socket(socket.AF_INET, socket.SOCK_RAW, icmp) # Make a raw socket named mySocket
             # myID = os.getpid() & 0xFFFF
