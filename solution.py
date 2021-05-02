@@ -6,6 +6,7 @@ import struct
 import time
 import select
 import binascii
+import binascii
 
 ICMP_ECHO_REQUEST = 8
 MAX_HOPS = 30
@@ -74,15 +75,15 @@ def get_route(hostname):
     timeLeft = TIMEOUT
     tracelist1 = []  # This is your list to use when iterating through each trace
     tracelist2 = []  # This is your list to contain all traces
+    icmp = socket.getprotobyname("icmp")
 
     for ttl in range(1, MAX_HOPS):
         for tries in range(TRIES):
             destAddr = gethostbyname(hostname)
             # Fill in start
             # Make a raw socket named mySocket
-            icmp = socket.getprotobyname("icmp")
             mySocket = socket(AF_INET, SOCK_RAW, icmp) # Make a raw socket named mySocket
-            #myID = os.getpid() & 0xFFFF
+            # myID = os.getpid() & 0xFFFF
             # Fill in end
             mySocket.setsockopt(IPPROTO_IP, IP_TTL, struct.pack('I', ttl))
             mySocket.settimeout(TIMEOUT)
