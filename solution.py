@@ -7,6 +7,7 @@ import time
 import select
 import binascii
 from statistics import stdev
+from statistics import pstdev
 
 ICMP_ECHO_REQUEST = 8
 
@@ -128,10 +129,10 @@ def ping(host, timeout=1):
         time.sleep(1) #change me to 1
 
     #vars = [float(round(packet_min , 2)), float(round(packet_avg , 2)), float(round(packet_max , 2)), float(round((stdev(stdev_var)), 2))] # change me to 2
-    vars.append(str(round(packet_min)))
-    vars.append(str(round(packet_avg , 1)))
-    vars.append(str(round(packet_max)))
-    vars.append(str(round((stdev(stdev_var)) ,1)))
+    vars.append(str(round(packet_min , 2)))
+    vars.append(str(round(packet_avg , 2)))
+    vars.append(str(round(packet_max , 2)))
+    vars.append(str(round((pstdev(stdev_var)) ,2 )))
     print(vars)
     return vars
 
