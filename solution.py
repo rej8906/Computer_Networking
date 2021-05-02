@@ -81,6 +81,7 @@ def get_route(hostname):
 
     for ttl in range(1, MAX_HOPS):
         for tries in range(TRIES):
+            tracelist1.clear()
             destAddr = gethostbyname(hostname)
             # Fill in start
             icmp = getprotobyname("icmp")
@@ -167,3 +168,5 @@ def get_route(hostname):
                 break
             finally:
                 mySocket.close()
+
+get_route("google.com")
