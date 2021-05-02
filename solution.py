@@ -57,8 +57,8 @@ def receiveOnePing(mySocket, ID, timeout, destAddr):
         icmpHeader = recPacket[20:28]
         type, code, checksum, id, seq = struct.unpack('bbHHh', recPacket[20:28])
         bytesInDouble = struct.calcsize('d')
-        timeData = (struct.unpack('d', recPacket[28:28 + bytesInDouble])[0])
-        delay = (timeReceived - timeData)
+        timeData = struct.unpack('d', recPacket[28:28 + bytesInDouble])[0]
+        delay = round((timeReceived - timeData) * 1000)
         packet_min = min(packet_min, delay)
         packet_max = max(packet_max, delay)
         stdev_var[packet_cnt] = delay ;
@@ -114,38 +114,25 @@ def doOnePing(destAddr, timeout):
 
 
 def ping(host, timeout=1):
-    global delay, packet_max, packet_min, packet_avg, stdev_var, vars
-    vars = [0, 0, 0, 0]
-    vars.clear()
+    global delay, packet_max, packet_min, packet_avg, stdev_var
     #timeout=1 means: If one second goes by without a reply from the server, # the client assumes that either the client's ping or the server's pong is lost
     dest = gethostbyname(host)
-
+    vars = []
     print("Pinging " + dest + " using Python:")
     print("")
     # Calculate vars values and return them
     # Send ping requests to a server separated by approximately one second
     for i in range(0,4):
         delay = doOnePing(dest, timeout)
-        print(delay)
+        #print(delay)
         time.sleep(1) #change me to 1
 
-    vars = [str((round(packet_min * 1000 , 2))), str(round((packet_avg*1000) , 2)), str(round((packet_max* 1000) , 2)), str(round(((stdev(stdev_var)) * 1000), 2))] # change me to 2
-
-    print("testvals:")
-    print("min", packet_min)
-    print("avg" , packet_avg)
-    print("max" , packet_max)
-    print("stdev" , ((stdev(stdev_var))))
-    #vars = []
-    #vars.append(str(round(packet_min *1000, 2)))
-    #vars.append(str(round(packet_avg *1000 , 2)))
-    #vars.append(str(round(packet_max *1000, 2)))
-    #vars.append(str(round(((stdev(stdev_var))* 1000) ,2)))
-    print (vars)
+    #vars = [float(round(packet_min , 2)), float(round(packet_avg , 2)), float(round(packet_max , 2)), float(round((stdev(stdev_var)), 2))] # change me to 2
+    vars.append(str(round(packet_min , 2)))
+    vars.append(str(round(packet_avg , 2)))
+    vars.append(str(round(packet_max , 2)))
+    vars.append(str(round((stdev(stdev_var)) ,2)))
     return vars
 
-
 if __name__ == '__main__':
-    ping("google.co.il")
-    sys.exit()
-
+   ping("google.co.il")
