@@ -117,8 +117,9 @@ def get_route(hostname):
 
             else:
                 # Fill in start
-                icmpHeader = recPacket[20:28]
-                type, code, checksum, id, seq = struct.unpack('bbHHh', recPacket[20:28])
+                recvPacket, addr = mySocket.recvfrom(1024)
+                icmpHeader = recvPacket[20:28]
+                type, code, checksum, id, seq = struct.unpack('bbHHh', recvPacket[20:28])
                 # Fill in end
                 try:  # try to fetch the hostname
                 # Fill in start
