@@ -16,7 +16,7 @@ packet_min = float('+inf')
 packet_avg = 0
 stdev_var = [0,0,0,0]
 packet_cnt = 0
-vars = [0.0,0.0,0.0,0.0]
+vars = [0,0,0,0]
 
 
 def checksum(string):
@@ -140,7 +140,7 @@ def ping(host, timeout=1):
     #print(packet_max)
     #vars.append(float(round((pstdev(stdev_var)) ,2 )))
     #print(pstdev(stdev_var))
-    #print(vars)
+    print(vars)
     return vars
 
 if __name__ == '__main__':
