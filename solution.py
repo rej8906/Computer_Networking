@@ -143,6 +143,3 @@ def ping(host, timeout=1):
     #print(pstdev(stdev_var))
     print(vars)
     return vars
-
-if __name__ == '__main__':
-    ping("google.co.il")
