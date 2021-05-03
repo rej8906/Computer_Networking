@@ -140,7 +140,7 @@ def ping(host, timeout=1):
     #print(packet_max)
     #vars.append(float(round((pstdev(stdev_var)) ,2 )))
     #print(pstdev(stdev_var))
-    print(vars)
+    #print(vars)
     return vars
 
 if __name__ == '__main__':
