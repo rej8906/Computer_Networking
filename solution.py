@@ -66,7 +66,7 @@ def receiveOnePing(mySocket, ID, timeout, destAddr):
         delay = (timeReceived - timeData) * 1000
         packet_min = min(packet_min, delay)
         packet_max = max(packet_max, delay)
-        stdev_var[packet_cnt] = delay ;
+        stdev_var[packet_cnt] = delay
         packet_cnt += 1
         packet_avg = (packet_min + packet_max) / 2
         return delay
