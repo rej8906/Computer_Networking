@@ -130,7 +130,7 @@ def ping(host, timeout=1):
         #print(delay)
         time.sleep(1) #change me to 1
     packet_avg = sum(stdev_var) / 4
-    vars = [str(round(packet_min)), str(round(packet_avg , 2)), str(round(packet_max)), str(round((pstdev(stdev_var)), 2))] # change me to 2
+    vars = [str(round(packet_min)), str(round(packet_max)), str(round(packet_avg , 2)), str(round((pstdev(stdev_var)), 2))] # change me to 2
     #print ("avg" , packet_avg)
     #vars.append(int(round(packet_min, 2)))
     #print (packet_min)
